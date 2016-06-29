@@ -12,7 +12,7 @@ class RequestID
   end
 end
 
-class MyApp < Sinatra::Base
+class App < Sinatra::Base
   configure :production, :development do
     enable :logging
   end
@@ -40,7 +40,8 @@ class MyApp < Sinatra::Base
   end
 
   def produce(out)
-    out << "Hold on, you're getting #{count} parts sent:<br/>\n"
+    out << "Sending #{count} parts:<br/>\n"
+
     count.times do |i|
       puts "#{request.env['VCAP_REQUEST_ID']} - sending #{i} of #{count}"
       out << "#{i}<br/>\n"
