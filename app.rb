@@ -17,6 +17,10 @@ class App < Sinatra::Base
     enable :logging
   end
 
+  before do
+    content_type 'text/plain'
+  end
+
   use RequestID
 
   get '/' do
@@ -40,11 +44,11 @@ class App < Sinatra::Base
   end
 
   def produce(out)
-    out << "Sending #{count} parts:<br/>\n"
+    out << "Sending #{count} parts:\n"
 
     count.times do |i|
       puts "#{request.env['VCAP_REQUEST_ID']} - sending #{i} of #{count}"
-      out << "#{i}<br/>\n"
+      out << "#{i}\n"
       sleep 1
     end
 
