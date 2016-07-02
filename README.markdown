@@ -33,10 +33,10 @@ $ foreman start -p 7890
 $ curl -vvv localhost:5100/
 …
 # stream content for five seconds
-$ curl -vvv localhost:5100/stream?t=5
+$ curl -vvv localhost:5000/stream?t=5
 …
 # wait five seconds before returning the result
-$ curl -vvv localhost:5100/slow?t=5
+$ curl -vvv localhost:5000/slow?t=5
 ```
 
 ## Reload Config
