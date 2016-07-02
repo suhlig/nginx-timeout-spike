@@ -2,7 +2,6 @@ daemon off;
 pid <%= Dir.pwd %>/nginx.pid;
 
 events {
-  worker_connections  8192;
 }
 
 http {
@@ -13,7 +12,6 @@ http {
 
   server {
     listen <%= ENV.fetch('PORT') %>;
-    server_name localhost;
 
     location / {
       proxy_pass http://app;

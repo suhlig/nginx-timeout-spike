@@ -39,12 +39,16 @@ $ curl -vvv localhost:5000/stream?t=5
 $ curl -vvv localhost:5000/slow?t=5
 ```
 
-## Reload Config
+## Stress Test
 
 ```
-nginx -c $(realpath nginx.conf) -s reload
+# start stress test
+wrk --threads 12 --connections 60 --duration 60s --timeout 10 http://127.0.0.1:5000/stream?t=2
+
+# see puma stats
+curl http://127.0.0.1:9293/stats?token=foo
 ```
 
 # Notes
 
-* nginx works with absolute file names only ([except relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the nginx.conf at start.
+* nginx works with absolute file names only ([except relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the nginx.conf at start. This is done in the `Procfile`.

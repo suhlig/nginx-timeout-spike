@@ -1,1 +1,2 @@
 brew 'nginx'
+brew 'wrk'

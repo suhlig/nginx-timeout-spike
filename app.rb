@@ -24,7 +24,7 @@ class App < Sinatra::Base
   use RequestID
 
   get '/' do
-    'Hello, nginx!'
+    "Hello #{request_id} from nginx!"
   end
 
   # this is affected proxy_read_timeout
@@ -44,14 +44,18 @@ class App < Sinatra::Base
   end
 
   def produce(out)
-    out << "Sending #{count} parts:\n"
+    out << "Welcome visitor #{request_id}; sending #{count} parts to you:\n"
 
     count.times do |i|
-      puts "#{request.env['VCAP_REQUEST_ID']} - sending #{i} of #{count}"
+      puts "#{request_id} - sending #{i} of #{count}"
       out << "#{i}\n"
       sleep 1
     end
 
     out
+  end
+
+  def request_id
+    request.env['VCAP_REQUEST_ID']
   end
 end
