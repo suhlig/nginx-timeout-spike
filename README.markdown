@@ -10,8 +10,11 @@ $ brew bundle
 
 # Install rubygems
 $ bundle install
+```
 
-# Install foreman (not part of the Gemfile [on purpose](https://github.com/ddollar/foreman#installation))
+Also install `foreman`, but not as part of the Gemfile ([on purpose](https://github.com/ddollar/foreman#installation))):
+
+```
 $ gem install foreman
 ```
 
