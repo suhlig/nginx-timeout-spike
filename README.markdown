@@ -12,7 +12,7 @@ $ brew bundle
 $ bundle install
 ```
 
-Also install `foreman`, but not as part of the Gemfile ([on purpose](https://github.com/ddollar/foreman#installation))):
+Also install `foreman`, but not as part of the Gemfile ([on purpose](https://github.com/ddollar/foreman#installation)):
 
 ```
 $ gem install foreman
@@ -33,7 +33,7 @@ $ foreman start -p 7890
 ## Test
 
 ```
-$ curl -vvv localhost:5100/
+$ curl -vvv localhost:5000/
 …
 # stream content for five seconds
 $ curl -vvv localhost:5000/stream?t=5
