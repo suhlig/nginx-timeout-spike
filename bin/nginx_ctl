@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
+(
+  cd $DIR
+
+  case $1 in
+    start)
+      erb nginx.conf.erb > nginx.conf
+      nginx -c $(realpath nginx.conf)
+    ;;
+
+    stop)
+      nginx -c $(realpath nginx.conf) -s stop
+      ;;
+
+    *)
+      echo "Usage: $(basename "${BASH_SOURCE[0]}") {start|stop}"
+      ;;
+    esac
+)

@@ -1,17 +1,17 @@
-daemon off;
+daemon on;
 pid <%= Dir.pwd %>/nginx.pid;
 
 events {
 }
 
 http {
-  error_log <%= Dir.pwd %>/error.log info;
-  access_log <%= Dir.pwd %>/access.log combined;
+  error_log <%= Dir.pwd %>/log/nginx.error.log info;
+  access_log <%= Dir.pwd %>/log/nginx.access.log combined;
 
   default_type  text/html;
 
   server {
-    listen <%= ENV.fetch('PORT') %>;
+    listen <%= ENV.fetch('PORT', 5000) %>;
 
     location / {
       proxy_pass http://app;

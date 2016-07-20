@@ -1,0 +1,39 @@
+#!/bin/bash -e
+
+#  nginx: erb nginx.conf.erb > nginx.conf && nginx -c $(realpath nginx.conf)
+
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
+(
+  cd $DIR
+
+  case $1 in
+    start)
+      bundle exec puma \
+        --daemon \
+        --pidfile puma.pid \
+        --environment production \
+        --bind unix://app.sock \
+        --control tcp://127.0.0.1:9293 \
+        --control-token foo \
+        --redirect-stdout log/puma.stdout.log \
+        --redirect-stderr log/puma.stderr.log \
+        --redirect-append
+    ;;
+
+    status)
+      curl http://127.0.0.1:9293/stats?token=foo \
+          --silent \
+          --write-out "\n" \
+        || echo "Down"
+      ;;
+
+    stop)
+      xargs kill < puma.pid
+      ;;
+
+    *)
+      echo "Usage: $(basename "${BASH_SOURCE[0]}") {start|status|stop}"
+      ;;
+    esac
+)

@@ -12,22 +12,16 @@ $ brew bundle
 $ bundle install
 ```
 
-Also install `foreman`, but not as part of the Gemfile ([on purpose](https://github.com/ddollar/foreman#installation)):
+## Start Monit
 
 ```
-$ gem install foreman
+$ monit
 ```
 
-## Start
+## Check Status
 
 ```
-$ foreman start
-```
-
-In order to determine the port instead of letting foreman auto-select it, pass it as parameter:
-
-```
-$ foreman start -p 7890
+$ monit summary
 ```
 
 ## Test
@@ -54,4 +48,4 @@ curl http://127.0.0.1:9293/stats?token=foo
 
 # Notes
 
-* nginx works with absolute file names only ([except relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the nginx.conf at start. This is done in the `Procfile`.
+* nginx works with absolute file names only ([except relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the `nginx.conf` at start. This is done in  `bin/nginx_ctl`.
