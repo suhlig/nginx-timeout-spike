@@ -15,7 +15,7 @@ $ bundle install
 ## Start Monit
 
 ```
-$ monit
+$ scripts/start
 ```
 
 ## Check Status
@@ -24,7 +24,9 @@ $ monit
 $ monit summary
 ```
 
-## Test
+# Test
+
+# App
 
 ```
 $ curl -vvv localhost:5000/
@@ -36,10 +38,10 @@ $ curl -vvv localhost:5000/stream?t=5
 $ curl -vvv localhost:5000/slow?t=5
 ```
 
-## Stress Test
+## Stress
 
 ```
-# start stress test
+# start
 wrk --threads 12 --connections 60 --duration 60s --timeout 10 http://127.0.0.1:5000/stream?t=2
 
 # see puma stats
@@ -48,4 +50,4 @@ curl http://127.0.0.1:9293/stats?token=foo
 
 # Notes
 
-* nginx works with absolute file names only ([except relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the `nginx.conf` at start. This is done in  `bin/nginx_ctl`.
+* nginx and monit require with absolute file names (with the exception that nginx understands those [relative to the --prefix passed at compile time](http://nginx.org/en/docs/configure.html)), thus we need to generate the `nginx.conf` and `monitrc` before starting. This is done by all the scripts in `scripts` folder.

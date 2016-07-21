@@ -1,7 +1,5 @@
 #!/bin/bash -e
 
-#  nginx: erb nginx.conf.erb > nginx.conf && nginx -c $(realpath nginx.conf)
-
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 
 (

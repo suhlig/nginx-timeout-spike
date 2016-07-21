@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
+(
+  cd $DIR
+  erb monitrc.erb > monitrc
+  chmod 600 monitrc
+  monit
+)

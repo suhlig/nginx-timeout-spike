@@ -1,0 +1,23 @@
+set logfile <%= Dir.pwd %>/log/monit.log
+set pidfile <%= Dir.pwd %>/monit.pid
+set daemon 10
+set httpd port 2812
+  allow localhost
+
+check process puma
+  with pidfile <%= Dir.pwd %>/puma.pid
+
+  start program = "<%= Dir.pwd %>/scripts/puma_ctl start"
+  stop program  = "<%= Dir.pwd %>/scripts/puma_ctl stop"
+
+  if totalmem > 300.0 MB for 5 cycles then restart
+  if cpu usage > 95% for 5 cycles then restart
+
+check process nginx
+  with pidfile <%= Dir.pwd %>/nginx.pid
+
+  start program = "<%= Dir.pwd %>/scripts/nginx_ctl start"
+  stop program  = "<%= Dir.pwd %>/scripts/nginx_ctl stop"
+
+  if totalmem > 100.0 MB for 5 cycles then restart
+  if cpu usage > 95% for 5 cycles then restart
