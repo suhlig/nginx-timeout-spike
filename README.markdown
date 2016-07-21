@@ -18,6 +18,8 @@ $ bundle install
 $ scripts/start
 ```
 
+Monit will take care of starting all services it knows about.
+
 ## Check Status
 
 ```
